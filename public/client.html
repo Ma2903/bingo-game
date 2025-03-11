@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Player</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        .bingo-card { display: grid; grid-template-columns: repeat(5, 1fr); width: 200px; }
+        .cell { width: 40px; height: 40px; text-align: center; border: 1px solid black; font-size: 18px; }
+        .marked { background-color: green; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Your Bingo Card</h1>
+    <div class="bingo-card" id="bingoCard"></div>
+
+    <script>
+        const socket = io();
+        const bingoCard = document.getElementById("bingoCard");
+        
+        // Generate random Bingo numbers
+        function generateBingoCard() {
+            const numbers = [];
+            while (numbers.length < 25) {
+                let num = Math.floor(Math.random() * 75) + 1;
+                if (!numbers.includes(num)) numbers.push(num);
+            }
+            return numbers;
+        }
+
+        const cardNumbers = generateBingoCard();
+        cardNumbers.forEach(num => {
+            let cell = document.createElement("div");
+            cell.classList.add("cell");
+            cell.innerText = num;
+            bingoCard.appendChild(cell);
+        });
+
+        // Listen for called numbers
+        socket.on("updateNumbers", (calledNumbers) => {
+            document.querySelectorAll(".cell").forEach(cell => {
+                if (calledNumbers.includes(Number(cell.innerText))) {
+                    cell.classList.add("marked");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

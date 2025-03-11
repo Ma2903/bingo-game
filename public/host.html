@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Host</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Bingo Host</h1>
+    <button id="callNumber">Draw Number</button>
+    <button id="resetGame">Reset Game</button>
+    <h2>Numbers Called:</h2>
+    <div id="calledNumbers"></div>
+
+    <script>
+        const socket = io();
+        const calledNumbersDiv = document.getElementById("calledNumbers");
+
+        document.getElementById("callNumber").addEventListener("click", () => {
+            socket.emit("callNumber");
+        });
+
+        document.getElementById("resetGame").addEventListener("click", () => {
+            socket.emit("resetGame");
+        });
+
+        socket.on("updateNumbers", (numbers) => {
+            calledNumbersDiv.innerHTML = numbers.join(", ");
+        });
+    </script>
+</body>
+</html>
