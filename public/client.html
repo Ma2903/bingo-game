@@ -7,7 +7,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <style>
         .bingo-card { display: grid; grid-template-columns: repeat(5, 1fr); width: 200px; }
-        .cell { width: 40px; height: 40px; text-align: center; border: 1px solid black; font-size: 18px; }
+        .cell { width: 80px; height: 40px; text-align: center; border: 1px solid black; font-size: 18px; }
         .marked { background-color: green; color: white; }
     </style>
 </head>
@@ -18,24 +18,40 @@
     <script>
         const socket = io();
         const bingoCard = document.getElementById("bingoCard");
-        
-        // Generate random Bingo numbers
-        function generateBingoCard() {
-            const numbers = [];
-            while (numbers.length < 25) {
-                let num = Math.floor(Math.random() * 75) + 1;
-                if (!numbers.includes(num)) numbers.push(num);
-            }
-            return numbers;
+
+        // Get token from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        // Fetch Bingo card using token
+        function adquireBingoCard() {
+            fetch(`./getTable?token=${token}`, {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.error) {
+                    const cardNumbers = data.cartela;
+                    cardNumbers.forEach((num,index) => {
+                        let cell = document.createElement("div");
+                        cell.classList.add("cell");
+                        if(index == 12){
+                            cell.innerText = "BINGO";
+                        }else{
+                            cell.innerText = num;
+                        }
+                        bingoCard.appendChild(cell);
+                    });
+                } else {
+                    console.error("Erro ao obter a cartela");
+                }
+            });
         }
 
-        const cardNumbers = generateBingoCard();
-        cardNumbers.forEach(num => {
-            let cell = document.createElement("div");
-            cell.classList.add("cell");
-            cell.innerText = num;
-            bingoCard.appendChild(cell);
-        });
+        adquireBingoCard();
 
         // Listen for called numbers
         socket.on("updateNumbers", (calledNumbers) => {

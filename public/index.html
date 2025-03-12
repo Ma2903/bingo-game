@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Bingo!!</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+    <input type="text" name="username" id="username">
+    <button onclick="entrar()">Entrar</button>
+    <script>
+        let input = document.querySelector("#username")
+        let datafora
+        async function entrar(){
+           await fetch('./entrar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: input.value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                datafora = data
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+            
+            window.location.href = "./client.html?token=" + datafora.token
+        }
+    </script>
+</body>
+</html>
