@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bingo Player</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
     <script src="/socket.io/socket.io.js"></script>
-    <style>
-        .bingo-card { display: grid; grid-template-columns: repeat(5, 1fr); width: 200px; }
-        .cell { width: 80px; height: 40px; text-align: center; border: 1px solid black; font-size: 18px; }
-        .marked { background-color: green; color: white; }
-    </style>
 </head>
 <body>
-    <h1>Your Bingo Card</h1>
-    <div class="bingo-card" id="bingoCard"></div>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
+        </header>
+        <main>
+            <p>Marque os números chamados e boa sorte!</p>
+            <div class="bingo-card" id="bingoCard"></div>
+        </main>
+        <footer>
+            <p>Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
+        </footer>
+    </div>
 
     <script>
         const socket = io();
@@ -24,6 +31,7 @@
         const token = urlParams.get('token');
 
         // Fetch Bingo card using token
+        let cardNumbers
         function adquireBingoCard() {
             fetch(`./getTable?token=${token}`, {
                 method: 'get',
@@ -34,13 +42,13 @@
             .then(response => response.json())
             .then(data => {
                 if (!data.error) {
-                    const cardNumbers = data.cartela;
-                    cardNumbers.forEach((num,index) => {
+                    cardNumbers = data.cartela;
+                    cardNumbers.forEach((num, index) => {
                         let cell = document.createElement("div");
                         cell.classList.add("cell");
-                        if(index == 12){
+                        if (index == 12) {
                             cell.innerText = "BINGO";
-                        }else{
+                        } else {
                             cell.innerText = num;
                         }
                         bingoCard.appendChild(cell);
@@ -55,8 +63,9 @@
 
         // Listen for called numbers
         socket.on("updateNumbers", (calledNumbers) => {
-            document.querySelectorAll(".cell").forEach(cell => {
-                if (calledNumbers.includes(Number(cell.innerText))) {
+            cardNumbers.forEach((num, index) => {
+                let cell = bingoCard.children[index];
+                if (calledNumbers.includes(num)) {
                     cell.classList.add("marked");
                 }
             });

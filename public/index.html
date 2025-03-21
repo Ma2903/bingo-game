@@ -5,16 +5,33 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Bingo!!</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' media='screen' href='styles/main.css'>
 </head>
 <body>
-    <input type="text" name="username" id="username">
-    <button onclick="entrar()">Entrar</button>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-laptop-code"></i> Bingo dos Devs <i class="fas fa-terminal"></i></h1>
+        </header>
+        <main>
+            <p>Bem-vindo ao Bingo dos Desenvolvedores! Insira seu nome de usuário para começar:</p>
+            <div class="form-group">
+                <label for="username"><i class="fas fa-user"></i> Nome de usuário</label>
+                <input type="text" name="username" id="username" placeholder="Digite seu nome de dev">
+            </div>
+            <button class="btn-entrar" onclick="entrar()">
+                <i class="fas fa-play"></i> Entrar
+            </button>
+        </main>
+        <footer>
+            <p>Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
+        </footer>
+    </div>
     <script>
-        let input = document.querySelector("#username")
-        let datafora
-        async function entrar(){
-           await fetch('./entrar', {
+        let input = document.querySelector("#username");
+        let datafora;
+        async function entrar() {
+            await fetch('./entrar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

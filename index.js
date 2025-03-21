@@ -22,16 +22,16 @@ let HOST = {
 const palavrasDeProgramacao = [
     "Algoritmo", "Variável", "Função", "Array", "Objeto", "Laço", "Condicional", "Push", "Pop", "Shift",
     "Unshift", "Callback", "Promise", "Async", "Await", "Classe", "Construtor", "Prototype", "Módulo",
-    "Import", "Export", "Map", "Filter", "Reduce", "Evento", "Listener", "API", "REST", "CRUD", "JSON",
-    "DOM", "ES6", "Arrow Function", "Desestruturamento", "Spread", "Rest", "Fechamento", "Escopo", "Hoisting", "Callback Hell",
+    "Import", "Export", "Sprint", "Filter", "Reduce", "Event", "Listener", "API", "REST", "CRUD", "JSON",
+    "DOM", "ES6", "Arrow Function", "Desestruturamento", "Commit", "Mergin", "Fechamento", "Escopo", "DotNet", "Response",
     "POO", "Herança", "Encapsulamento", "Abstração", "Polimorfismo", "TypeScript", "Node.js", "React", "Vue", "Angular",
-    "Framework", "Biblioteca", "Webpack", "Babel", "Git", "GitHub", "Versionamento", "Refatoração", "Debugger", "Ponto de Interrupção",
-    "Recursão", "Iteração", "Complexidade", "Algoritmo de Busca", "Algoritmo de Ordenação", "Busca Binária", "Merge Sort", "Quick Sort",
-    "Hashmap", "Tabela Hash", "Pilha", "Fila", "Lista Encadeada", "Grafo", "Árvore", "Heap", "Recursividade", "API RESTful",
-    "Token", "JWT", "OAuth", "CORS", "BD", "SQL", "NoSQL", "MongoDB", "PostgreSQL", "MySQL", "SQLite", "GraphQL", "Esquema", "Mutação",
-    "Consulta", "Roteador", "Middleware", "Express", "NestJS", "Vuex", "Redux", "Gerenciamento de Estado", "Componente", "JSX", "DOM Virtual",
-    "Loop de Eventos", "Concorrência", "Thread", "Mutex", "Semáforo", "Deadlock", "Condição de Corrida", "Testes Unitários", "TDD", "CI/CD",
-    "Docker", "Kubernetes", "Cloud", "AWS", "Azure", "Heroku", "Vercel", "Pipeline de CI", "Pipeline de CD", "Pw", "Back-end", "Front-end", "Full-stack"
+    "Framework", "Biblioteca", "Identação", "Model", "Git", "GitHub", "Versionamento", "Refatoração", "Debugger", "Routes",
+    "Recursão", "Iteração", "Complexidade", "Busca", "Ordenação", "Busca Binária", "Merge Sort", "Quick Sort",
+    "Div", "PHP", "Pilha", "Fila", "LE", "Canva", "Árvore", "Ruby", "Recursividade", "RESTful",
+    "Token", "Controller", "OAuth", "CORS", "BD", "SQL", "NoSQL", "MongoDB", "PostgreSQL", "MySQL", "SQLite", "GraphQL", "Esquema", "Mutação",
+    "Consulta", "Roteador", "Kanban", "Express", "NestJS", "GitLans", "Laravel", "Trello", "Componente", "JSX", "DOM Virtual",
+    "Loop", "Concorrência", "Thread", "View", "C#", "Python", "IA", "Testes Unitários", "Framework", "Switch",
+    "Docker", "Bulma", "Cloud", "AWS", "Azure", "DevOps", "Tailwind", "Json", "XML", "Pw", "Back-end", "Front-end", "Full-stack"
 ];
   
 
@@ -46,14 +46,9 @@ io.on("connection", (socket) => {
     socket.emit("updateNumbers", calledNumbers);
 
     socket.on("callNumber", () => {
-        if (calledNumbers.length >= 75) return;
+        let newNumber = Math.floor(palavrasDeProgramacao.length * Math.random())
 
-        let newNumber;
-        do {
-            newNumber = Math.floor(Math.random() * 75) + 1;
-        } while (calledNumbers.includes(newNumber));
-
-        calledNumbers.push(newNumber);
+        calledNumbers.push(palavrasDeProgramacao[newNumber]);
         io.emit("updateNumbers", calledNumbers);
     });
 
@@ -89,8 +84,8 @@ app.get('/getTable', (req, res) => {
     res.send({error : false, cartela : player.cartela});
 });
 
-server.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
+server.listen(3333, () => {
+    console.log("Server running on http://localhost:3333");
 });
 
 function gerarCartela(){

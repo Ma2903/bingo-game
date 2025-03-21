@@ -4,14 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bingo Host</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-    <h1>Bingo Host</h1>
-    <button id="callNumber">Draw Number</button>
-    <button id="resetGame">Reset Game</button>
-    <h2>Numbers Called:</h2>
-    <div id="calledNumbers"></div>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chess-king"></i> Painel do Host <i class="fas fa-chess-queen"></i></h1>
+        </header>
+        <main>
+            <div class="host-controls">
+                <button id="callNumber" class="btn-host"><i class="fas fa-dice"></i> Sortear Número</button>
+                <button id="resetGame" class="btn-host"><i class="fas fa-redo"></i> Reiniciar Jogo</button>
+            </div>
+            <h2>Números Sorteados:</h2>
+            <div id="calledNumbers" class="called-numbers"></div>
+        </main>
+        <footer>
+            <p>Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
+        </footer>
+    </div>
 
     <script>
         const socket = io();
