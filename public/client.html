@@ -9,6 +9,10 @@
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
+    <div class="history"> 
+        <h2>Historico de numeros chamados</h2>
+        <div id="history" class="history-numbers"></div>
+    </div>
     <div class="container">
         <header>
             <h1><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
@@ -45,6 +49,9 @@
                     cardNumbers = data.cartela;
                     cardNumbers.forEach((num, index) => {
                         let cell = document.createElement("div");
+                        cell.addEventListener("click", () => {
+                            cell.classList.toggle("marked");
+                        });
                         cell.classList.add("cell");
                         if (index == 12) {
                             cell.innerText = "BINGO";
@@ -54,7 +61,7 @@
                         bingoCard.appendChild(cell);
                     });
                 } else {
-                    console.error("Erro ao obter a cartela");
+                    window.location.href = "/";
                 }
             });
         }
@@ -63,11 +70,29 @@
 
         // Listen for called numbers
         socket.on("updateNumbers", (calledNumbers) => {
+            if(calledNumbers.length < 1){
+                return
+            }
+
             cardNumbers.forEach((num, index) => {
-                let cell = bingoCard.children[index];
-                if (calledNumbers.includes(num)) {
-                    cell.classList.add("marked");
+
+                if(calledNumbers.length === 1){
+                    let actNumber = calledNumbers[calledNumbers.length - 1]
+
+                    document.querySelector(".history-numbers").innerHTML = `
+                        <span class='actually-number number-sort'>${actNumber}</span>
+                        `
                 }
+
+                if(calledNumbers.length > 1){
+                    let antNumber = calledNumbers[calledNumbers.length - 2]
+                    let actNumber = calledNumbers[calledNumbers.length - 1]
+
+                    document.querySelector(".history-numbers").innerHTML = `
+                        <span class='last-number number-sort'>${antNumber}</span>
+                        <span class='actually-number number-sort'>${actNumber}</span>
+                        `
+                    }
             });
         });
     </script>

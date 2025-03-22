@@ -16,7 +16,7 @@ app.use(cors())
 
 let HOST = {
     NOME : "Manu",
-    SENHA : "1234"
+    SENHA : "29030401"
 }
 
 const palavrasDeProgramacao = [
@@ -40,17 +40,49 @@ let players = {};
 
 
 io.on("connection", (socket) => {
-    console.log("A player connected");
-
     // Send already called numbers to new players
     socket.emit("updateNumbers", calledNumbers);
 
     socket.on("callNumber", () => {
-        let newNumber = Math.floor(palavrasDeProgramacao.length * Math.random())
+        // Shuffle the array of words
+        palavrasDeProgramacao.sort(() => Math.random() - 0.5);
 
-        calledNumbers.push(palavrasDeProgramacao[newNumber]);
+        // Filter out the already called numbers
+        let remainingWords = palavrasDeProgramacao.filter(word => !calledNumbers.includes(word));
+
+        // If there are no remaining words, reset the game
+        if (remainingWords.length === 0) {
+            calledNumbers = [];
+            remainingWords = palavrasDeProgramacao.slice();
+        }
+
+        // Select a new word from the remaining words
+        let newWord = remainingWords[Math.floor(Math.random() * remainingWords.length)];
+
+        // Add the new word to the called numbers
+        calledNumbers.push(newWord);
+
+        // Emit the updated called numbers to all clients
         io.emit("updateNumbers", calledNumbers);
     });
+
+    socket.on("checkBingo", () => {
+        let player = Object.values(players).find(player => player.socketId === socket.id);
+        if(!player) return;
+
+        let cartela = player.cartela;
+        let bingo = true;
+        cartela.forEach(word => {
+            if(!calledNumbers.includes(word)){
+                bingo = false;
+                return;
+            }
+        });
+
+        if(bingo){
+            io.emit("bingo", player.nome);
+        }
+    })
 
     socket.on("resetGame", () => {
         calledNumbers = [];
@@ -59,10 +91,17 @@ io.on("connection", (socket) => {
 });
 
 app.post('/entrar', (req, res) => {
-    if(req.body.nome == HOST.NOME){
+    if(req.body.nome === HOST.NOME && typeof req.body.password === "undefined"){
         res.send({error : false, isHost : true});
         return;
     }
+
+    if(req.body.password === HOST.SENHA && req.body.nome === HOST.NOME){
+        HOST.TOKEN = v4();
+        res.send({error : false, isHost : true, token : HOST.TOKEN});
+        return;
+    }
+
     if(players[req.body.nome]){
         res.send({error : true, token : players[req.body.nome].token});
         return;
@@ -83,6 +122,22 @@ app.get('/getTable', (req, res) => {
     }
     res.send({error : false, cartela : player.cartela});
 });
+
+app.post('/checkAdmin', (req, res) => {
+    if(req.body.token === HOST.TOKEN){
+        res.send({error : false, isHost : true});
+        return;
+    }
+    res.send({error : true});
+});
+
+app.get('/data',(req,res) => {
+    res.send({
+        calledNumbers : calledNumbers,
+        players : players,
+        HOST : HOST
+    });
+})
 
 server.listen(3333, () => {
     console.log("Server running on http://localhost:3333");

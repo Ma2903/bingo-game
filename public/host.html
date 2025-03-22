@@ -27,6 +27,32 @@
     </div>
 
     <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        async function entrar() {
+            if (!token) {
+            window.location.href = "/";
+            }else{
+                await fetch('./checkAdmin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ token: token })
+                })
+                .then(response => response.json())
+                .then(async data => {
+                    if(data.isHost){
+                        alert("Authorized")
+                    }else{
+                        window.location.href = "/"
+                    }
+                })
+            }
+        }
+        entrar()
+
         const socket = io();
         const calledNumbersDiv = document.getElementById("calledNumbers");
 

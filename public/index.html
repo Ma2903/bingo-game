@@ -29,25 +29,37 @@
     </div>
     <script>
         let input = document.querySelector("#username");
-        let datafora;
         async function entrar() {
             await fetch('./entrar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username: input.value })
+                body: JSON.stringify({ nome: input.value })
             })
             .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
+            .then(async data => {
+                if(data.isHost){
+                    let password = prompt("Insira a senha do host")
+                    await fetch('./entrar', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ nome: input.value, password: password })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        window.location.href = "./host.html?token=" + data.token
+                    })
+                }else{
+                    window.location.href = "./client.html?token=" + data.token
+                }
                 datafora = data
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-            
-            window.location.href = "./client.html?token=" + datafora.token
         }
     </script>
 </body>
