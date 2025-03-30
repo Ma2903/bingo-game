@@ -64,6 +64,12 @@
             socket.emit("resetGame");
         });
 
+        socket.on("sortedNumber",(number) => {
+            if(confirm(number)){
+                socket.emit("confirmNumber", number);
+            }
+        })
+
         socket.on("updateNumbers", (numbers) => {
             calledNumbersDiv.innerHTML = numbers.join(", ");
         });

@@ -69,7 +69,7 @@
         adquireBingoCard();
 
         // Listen for called numbers
-        socket.on("updateNumbers", (calledNumbers) => {
+        socket.on("showNumber", (calledNumbers) => {
             if(calledNumbers.length < 1){
                 return
             }

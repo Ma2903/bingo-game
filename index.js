@@ -36,6 +36,7 @@ const palavrasDeProgramacao = [
   
 
 let calledNumbers = [];
+let chamado = ''
 let players = {};
 
 
@@ -63,8 +64,13 @@ io.on("connection", (socket) => {
         calledNumbers.push(newWord);
 
         // Emit the updated called numbers to all clients
-        io.emit("updateNumbers", calledNumbers);
+        io.emit("sortedNumber", newWord);
     });
+
+    socket.on("confirmNumber", () => {
+        io.emit("showNumber",calledNumbers)
+        socket.emit("updateNumbers", calledNumbers);
+    })
 
     socket.on("checkBingo", () => {
         let player = Object.values(players).find(player => player.socketId === socket.id);
