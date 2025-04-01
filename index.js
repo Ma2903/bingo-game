@@ -15,23 +15,19 @@ app.use(express.static("public"));
 app.use(cors())
 
 let HOST = {
-    NOME : "Manu",
+    NOME : "Host",
     SENHA : "29030401"
 }
 
 const palavrasDeProgramacao = [
-    "Algoritmo", "Variável", "Função", "Array", "Objeto", "Laço", "Condicional", "Push", "Pop", "Shift",
-    "Unshift", "Callback", "Promise", "Async", "Await", "Classe", "Construtor", "Prototype", "Módulo",
-    "Import", "Export", "Sprint", "Filter", "Reduce", "Event", "Listener", "API", "REST", "CRUD", "JSON",
-    "DOM", "ES6", "Arrow Function", "Desestruturamento", "Commit", "Mergin", "Fechamento", "Escopo", "DotNet", "Response",
-    "POO", "Herança", "Encapsulamento", "Abstração", "Polimorfismo", "TypeScript", "Node.js", "React", "Vue", "Angular",
-    "Framework", "Biblioteca", "Identação", "Model", "Git", "GitHub", "Versionamento", "Refatoração", "Debugger", "Routes",
-    "Recursão", "Iteração", "Complexidade", "Busca", "Ordenação", "Busca Binária", "Merge Sort", "Quick Sort",
-    "Div", "PHP", "Pilha", "Fila", "LE", "Canva", "Árvore", "Ruby", "Recursividade", "RESTful",
-    "Token", "Controller", "OAuth", "CORS", "BD", "SQL", "NoSQL", "MongoDB", "PostgreSQL", "MySQL", "SQLite", "GraphQL", "Esquema", "Mutação",
-    "Consulta", "Roteador", "Kanban", "Express", "NestJS", "GitLans", "Laravel", "Trello", "Componente", "JSX", "DOM Virtual",
-    "Loop", "Concorrência", "Thread", "View", "C#", "Python", "IA", "Testes Unitários", "Framework", "Switch",
-    "Docker", "Bulma", "Cloud", "AWS", "Azure", "DevOps", "Tailwind", "Json", "XML", "Pw", "Back-end", "Front-end", "Full-stack"
+    "Algoritmo", "Variável", "Função", "Array", "Objeto", "Condicional", "Push", "Pop","Async", "Await",
+    "Classe", "Construtor", "Import", "Export", "Sprint", "Event", "Listener", "API", "Back-end","REST",
+    "CRUD", "JSON", "Commit", "DotNet", "Response","POO", "Front-end", "Full-stack", "Herança", "Encapsulamento", 
+    "Polimorfismo", "TypeScript", "Node.js","React", "Vue", "Framework", "Model", "Git","GitHub", "DevOps",
+    "Busca Binária", "Merge Sort", "Quick Sort","Div", "PHP", "Pilha", "Fila", "Árvore", "RESTful", "Controller", 
+    "BD", "SQL", "NoSQL", "MongoDB", "MySQL", "SQLite", "Kanban", "Express", "Laravel", "Trello",
+    "Loop", "View", "C#", "Python", "IA", "Framework","Bulma", "Cloud", "AWS", "Azure", 
+    "Tailwind", "XML", "HTML", "CSS", "JavaScript",
 ];
   
 
