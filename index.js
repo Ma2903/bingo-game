@@ -24,7 +24,7 @@ const palavrasDeProgramacao = [
     "Classe", "Construtor", "Import", "Export", "Sprint", "Event", "Listener", "API", "Back-end","REST",
     "CRUD", "JSON", "Commit", "DotNet", "Response","POO", "Front-end", "Full-stack", "Herança", "Encapsulamento", 
     "Polimorfismo", "TypeScript", "Node.js","React", "Vue", "Framework", "Model", "Git","GitHub", "DevOps",
-    "Busca Binária", "Merge Sort", "Quick Sort","Div", "PHP", "Pilha", "Fila", "Árvore", "RESTful", "Controller", 
+    "Boostrap", "Merge Sort", "Quick Sort","Div", "PHP", "Pilha", "Fila", "Árvore", "RESTful", "Controller", 
     "BD", "SQL", "NoSQL", "MongoDB", "MySQL", "SQLite", "Kanban", "Express", "Laravel", "Trello",
     "Loop", "View", "C#", "Python", "IA", "Framework","Bulma", "Cloud", "AWS", "Azure", 
     "Tailwind", "XML", "HTML", "CSS", "JavaScript",

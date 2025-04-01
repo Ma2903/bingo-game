@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="styles/main.css">
     <script src="/socket.io/socket.io.js"></script>
 </head>
-<body>
-    <div class="history"> 
-        <h2>Historico de numeros chamados</h2>
-        <div id="history" class="history-numbers"></div>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
+    <div class="history bg-gray-800 p-6 rounded-lg shadow-lg w-2/5 h-96 max-w-md"> 
+        <h2 class="text-2xl font-bold mb-4 self-start">Histórico de Números Sorteados!</h2>
+        <div id="history" class="history-numbers flex justify-center items-center gap-2"></div>
     </div>
-    <div class="container">
+    <div class="container bg-gray-800 p-6 rounded-lg shadow-lg w-2/5 h-96 max-w-md">
         <header>
-            <h1><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
+            <h1 class="text-3xl font-bold text-green-500 mb-4"><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
         </header>
         <main>
             <p>Marque os números chamados e boa sorte!</p>
-            <div class="bingo-card" id="bingoCard"></div>
+            <div class="bingo-card grid grid-cols-5 gap-2 mx-auto" id="bingoCard"></div>
         </main>
         <footer>
             <p>Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
