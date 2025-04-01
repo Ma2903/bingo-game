@@ -19,7 +19,6 @@ body {
     background-color: #2c2c3e;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     width: 45%; /* Ajusta a largura para ser igual ao histórico */
-    height: 400px; /* Define uma altura fixa */
     margin: 0 10px; /* Espaçamento horizontal */
 }
 
@@ -190,12 +189,12 @@ footer i {
 
 .bingo-card {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr); /* Define 5 linhas iguais */
+    grid-auto-flow: column; /* Preenche os itens por colunas */
     gap: 10px;
     width: 100%; /* Ajusta a largura para ocupar todo o espaço disponível */
     height: 100%; /* Ajusta a altura para ocupar todo o espaço disponível */
     max-width: 350px; /* Define um tamanho máximo */
-    max-height: 350px; /* Define uma altura máxima */
     margin: 0 auto; /* Centraliza horizontalmente */
     justify-content: center; /* Centraliza horizontalmente os itens */
     align-items: center; /* Centraliza verticalmente os itens */
@@ -213,6 +212,7 @@ footer i {
     color: #f5f5f5;
     transition: background-color 0.3s, transform 0.2s;
     user-select: none;
+    cursor: pointer;
 }
 
 .cell:hover {

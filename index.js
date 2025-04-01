@@ -19,7 +19,7 @@ let HOST = {
     SENHA : "29030401"
 }
 
-const palavrasDeProgramacao = [
+let palavrasDeProgramacao = [
     "Algoritmo", "Variável", "Função", "Array", "Objeto", "Condicional", "Push", "Pop","Async", "Await",
     "Classe", "Construtor", "Import", "Export", "Sprint", "Event", "Listener", "API", "Back-end","REST",
     "CRUD", "JSON", "Commit", "DotNet", "Response","POO", "Front-end", "Full-stack", "Herança", "Encapsulamento", 
@@ -145,15 +145,33 @@ server.listen(3333, () => {
     console.log("Server running on http://localhost:3333");
 });
 
-function gerarCartela(){
+console.log(palavrasDeProgramacao.length)
+function gerarCartela() {
+
+    // Criar uma cópia do array e ordenar alfabeticamente
+    const palavrasOrdenadas = [...palavrasDeProgramacao].sort();
+
+    // Dividir em grupos de 15 palavras
+    const grupos = {
+        B: palavrasOrdenadas.slice(0, 15),
+        I: palavrasOrdenadas.slice(15, 30),
+        N: palavrasOrdenadas.slice(30, 45),
+        G: palavrasOrdenadas.slice(45, 60),
+        O: palavrasOrdenadas.slice(60, 75)
+    };
+
     let cartela = [];
 
-    let i = 0
-    while(i < 25){
-        let numero = palavrasDeProgramacao[Math.floor((Math.random() * palavrasDeProgramacao.length))];
-        if(cartela.includes(numero)) continue;
-        cartela.push(numero);
-        i++;
+    // Selecionar 5 palavras aleatórias de cada grupo e manter em ordem
+    for (let letra of ['B', 'I', 'N', 'G', 'O']) {
+        let palavrasColuna = new Set();
+        while (palavrasColuna.size < 5) {
+            let palavra = grupos[letra][Math.floor(Math.random() * grupos[letra].length)];
+            palavrasColuna.add(palavra);
+        }
+        cartela.push(...palavrasColuna);
     }
+
     return cartela;
 }
+

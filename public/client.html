@@ -47,16 +47,31 @@
             .then(data => {
                 if (!data.error) {
                     cardNumbers = data.cartela;
+                    // cardNumbers.unshift("O");
+                    // cardNumbers.unshift("G");
+                    // cardNumbers.unshift("N");
+                    // cardNumbers.unshift("I");
+                    cardNumbers.splice(20,0,"O")
+                    cardNumbers.splice(15,0,"G")
+                    cardNumbers.splice(10,0,"N")
+                    cardNumbers.splice(5,0,"I")
+                    cardNumbers.splice(0,0,"B")
+
                     cardNumbers.forEach((num, index) => {
                         let cell = document.createElement("div");
-                        cell.addEventListener("click", () => {
-                            cell.classList.toggle("marked");
-                        });
                         cell.classList.add("cell");
-                        if (index == 12) {
+                        if (index == 15) {
                             cell.innerText = "BINGO";
-                        } else {
+                            cell.classList.toggle("marked");
+                        } else if(index == 0 || index == 6 || index == 12 || index == 18 || index == 24){
                             cell.innerText = num;
+                            cell.classList.toggle("marked");
+
+                        }else {
+                            cell.innerText = num;
+                            cell.addEventListener("click", () => {
+                                cell.classList.toggle("marked");
+                            });
                         }
                         bingoCard.appendChild(cell);
                     });
