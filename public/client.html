@@ -10,9 +10,9 @@
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body class="bg-gray-900 text-white flex justify-center items-center items-center h-screen">
-    <div class="history bg-gray-800 p-4 rounded-lg shadow-lg w-2/5 h-32 max-w-md mb-4"> 
-        <h2 class="text-2xl font-bold mb-2 self-start">Histórico de Números Sorteados!</h2>
-        <div id="history" class="history-numbers flex justify-center items-center gap-2 flex-wrap"></div>
+    <div class="history bg-gray-800 p-4 rounded-lg shadow-lg w-3/5 max-w-lg mb-4"> 
+        <h2 class="text-2xl font-bold mb-2 text-center">Números Sorteados:</h2>
+        <div id="history" class="history-numbers bg-gray-700 p-4 rounded-lg text-lg grid grid-cols-5 gap-2"></div>
     </div>
     <div class="container bg-gray-800 p-4 rounded-lg shadow-lg w-3/5 h-auto max-w-lg">
         <header>
@@ -85,30 +85,16 @@
 
         // Listen for called numbers
         socket.on("showNumber", (calledNumbers) => {
-            if(calledNumbers.length < 1){
-                return
+            if (calledNumbers.length < 1) {
+                return;
             }
 
-            cardNumbers.forEach((num, index) => {
+            const historyContainer = document.querySelector(".history-numbers");
 
-                if(calledNumbers.length === 1){
-                    let actNumber = calledNumbers[calledNumbers.length - 1]
-
-                    document.querySelector(".history-numbers").innerHTML = `
-                        <span class='actually-number number-sort'>${actNumber}</span>
-                        `
-                }
-
-                if(calledNumbers.length > 1){
-                    let antNumber = calledNumbers[calledNumbers.length - 2]
-                    let actNumber = calledNumbers[calledNumbers.length - 1]
-
-                    document.querySelector(".history-numbers").innerHTML = `
-                        <span class='last-number number-sort'>${antNumber}</span>
-                        <span class='actually-number number-sort'>${actNumber}</span>
-                        `
-                    }
-            });
+            // Atualiza o histórico com todos os números sorteados
+            historyContainer.innerHTML = calledNumbers
+                .map(num => `<div class="bg-green-500 text-white font-bold py-1 px-2 rounded">${num}</div>`)
+                .join("");
         });
     </script>
 </body>
