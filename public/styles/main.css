@@ -11,6 +11,12 @@ body {
     flex-direction: row-reverse; /* Altera a direção para linha invertida */
 }
 
+.bingo-letter {
+    font-size: 4.5rem; /* Aumenta o tamanho da fonte */
+    font-weight: bold; /* Deixa o texto em negrito */
+    text-align: center; /* Centraliza o texto */
+}
+
 .container {
     text-align: center;
     padding: 20px;

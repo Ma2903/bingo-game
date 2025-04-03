@@ -6,23 +6,24 @@
     <title>Bingo Player</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="/socket.io/socket.io.js"></script>
 </head>
-<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
-    <div class="history bg-gray-800 p-6 rounded-lg shadow-lg w-2/5 h-96 max-w-md"> 
-        <h2 class="text-2xl font-bold mb-4 self-start">Histórico de Números Sorteados!</h2>
-        <div id="history" class="history-numbers flex justify-center items-center gap-2"></div>
+<body class="bg-gray-900 text-white flex justify-center items-center items-center h-screen">
+    <div class="history bg-gray-800 p-4 rounded-lg shadow-lg w-2/5 h-32 max-w-md mb-4"> 
+        <h2 class="text-2xl font-bold mb-2 self-start">Histórico de Números Sorteados!</h2>
+        <div id="history" class="history-numbers flex justify-center items-center gap-2 flex-wrap"></div>
     </div>
-    <div class="container bg-gray-800 p-6 rounded-lg shadow-lg w-2/5 h-96 max-w-md">
+    <div class="container bg-gray-800 p-4 rounded-lg shadow-lg w-3/5 h-auto max-w-lg">
         <header>
-            <h1 class="text-3xl font-bold text-green-500 mb-4"><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
+            <h1 class="text-3xl font-bold text-green-500 mb-4 text-center"><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
         </header>
         <main>
-            <p>Marque os números chamados e boa sorte!</p>
+            <p class="text-lg mb-2 text-center">Marque os números chamados e boa sorte!</p>
             <div class="bingo-card grid grid-cols-5 gap-2 mx-auto" id="bingoCard"></div>
         </main>
-        <footer>
-            <p>Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
+        <footer class="mt-2 text-center">
+            <p class="text-sm">Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
         </footer>
     </div>
 
@@ -47,10 +48,6 @@
             .then(data => {
                 if (!data.error) {
                     cardNumbers = data.cartela;
-                    // cardNumbers.unshift("O");
-                    // cardNumbers.unshift("G");
-                    // cardNumbers.unshift("N");
-                    // cardNumbers.unshift("I");
                     cardNumbers.splice(20,0,"O")
                     cardNumbers.splice(15,0,"G")
                     cardNumbers.splice(10,0,"N")
@@ -72,6 +69,9 @@
                             cell.addEventListener("click", () => {
                                 cell.classList.toggle("marked");
                             });
+                        }
+                        if (cell.innerText == "B" || cell.innerText == "I" || cell.innerText == "N" || cell.innerText == "G" || cell.innerText == "O") {
+                            cell.classList.add("bingo-letter");
                         }
                         bingoCard.appendChild(cell);
                     });
