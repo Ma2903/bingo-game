@@ -12,7 +12,7 @@ body {
 }
 
 .bingo-letter {
-    font-size: 4.5rem; /* Aumenta o tamanho da fonte */
+    font-size: 2.5rem !important; /* Aumenta o tamanho da fonte */
     font-weight: bold; /* Deixa o texto em negrito */
     text-align: center; /* Centraliza o texto */
 }
