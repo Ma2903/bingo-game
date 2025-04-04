@@ -20,14 +20,14 @@ let HOST = {
 }
 
 let palavrasDeProgramacao = [
-    "Algoritmo", "Variável", "Função", "Array", "Objeto", "Condicional", "Push", "Pop","Async", "Await",
-    "Classe", "Construtor", "Import", "Export", "Sprint", "Event", "Listener", "API", "Back-end","REST",
-    "CRUD", "JSON", "Commit", "DotNet", "Response","POO", "Front-end", "Full-stack", "Herança", "Encapsulamento", 
-    "Polimorfismo", "TypeScript", "Node.js","React", "Vue", "Framework", "Model", "Git","GitHub", "DevOps",
-    "Boostrap", "Merge Sort", "Quick Sort","Div", "PHP", "Pilha", "Fila", "Árvore", "RESTful", "Controller", 
-    "BD", "SQL", "NoSQL", "MongoDB", "MySQL", "SQLite", "Kanban", "Express", "Laravel", "Trello",
-    "Loop", "View", "C#", "Python", "IA", "Framework","Bulma", "Cloud", "AWS", "Azure", 
-    "Tailwind", "XML", "HTML", "CSS", "JavaScript",
+    "Algoritmo", "API", "Array", "Async", "Await", "AWS", "Azure", "Back-end", "BD", "Boostrap", 
+    "Bulma", "C#", "Classe", "Cloud", "Commit", "Condicional", "Construtor", "Controller", "CRUD", "CSS", 
+    "DevOps", "Div", "DotNet", "Encapsulamento", "Event", "Express", "Export", "Fila", "Framework", 
+    "Front-end", "Função", "Git", "GitHub", "Herança", "HTML", "IA", "Import", "JSON", "Kanban", 
+    "Laravel", "Listener", "Loop", "Merge Sort", "Model", "MongoDB", "MySQL", "Node.js", "NoSQL", 
+    "Objeto", "PHP", "Pilha", "Polimorfismo", "POO", "Pop", "Python", "Quick Sort", "React", "REST", 
+    "RESTful", "Response", "SQLite", "Sprint", "SQL", "Tailwind", "Trello", "TypeScript", "Variável", 
+    "View", "Vue", "XML", "JavaScript"
 ];
   
 
@@ -41,8 +41,6 @@ io.on("connection", (socket) => {
     socket.emit("updateNumbers", calledNumbers);
 
     socket.on("callNumber", () => {
-        // Shuffle the array of words
-        palavrasDeProgramacao.sort(() => Math.random() - 0.5);
 
         // Filter out the already called numbers
         let remainingWords = palavrasDeProgramacao.filter(word => !calledNumbers.includes(word));
@@ -57,6 +55,7 @@ io.on("connection", (socket) => {
         let numberNewWord = Math.floor(Math.random() * remainingWords.length)
         let newWord = remainingWords[numberNewWord];
         
+        console.log(numberNewWord + "esse é o número do array")
         if(numberNewWord < 15){
             numberNewWord = "B";
         }
@@ -72,8 +71,9 @@ io.on("connection", (socket) => {
         if(numberNewWord < 75 && numberNewWord > 59){
             numberNewWord = "O";
         }
-
+        
         // Add the new word to the called numbers
+        console.log(numberNewWord +  "-" + newWord);
         calledNumbers.push(newWord);
         // Emit the updated called numbers to all clients
         io.emit("sortedNumber", {
@@ -168,7 +168,7 @@ console.log(palavrasDeProgramacao.length)
 function gerarCartela() {
 
     // Criar uma cópia do array e ordenar alfabeticamente
-    const palavrasOrdenadas = [...palavrasDeProgramacao].sort();
+    const palavrasOrdenadas = [...palavrasDeProgramacao];
 
     // Dividir em grupos de 15 palavras
     const grupos = {
