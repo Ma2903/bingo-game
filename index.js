@@ -54,13 +54,32 @@ io.on("connection", (socket) => {
         }
 
         // Select a new word from the remaining words
-        let newWord = remainingWords[Math.floor(Math.random() * remainingWords.length)];
+        let numberNewWord = Math.floor(Math.random() * remainingWords.length)
+        let newWord = remainingWords[numberNewWord];
+        
+        if(numberNewWord < 15){
+            numberNewWord = "B";
+        }
+        if(numberNewWord < 30 && numberNewWord > 14){
+            numberNewWord = "I";
+        }
+        if(numberNewWord < 45 && numberNewWord > 29){
+            numberNewWord = "N";
+        }
+        if(numberNewWord < 60 && numberNewWord > 44){
+            numberNewWord = "G";
+        }
+        if(numberNewWord < 75 && numberNewWord > 59){
+            numberNewWord = "O";
+        }
 
         // Add the new word to the called numbers
         calledNumbers.push(newWord);
-
         // Emit the updated called numbers to all clients
-        io.emit("sortedNumber", newWord);
+        io.emit("sortedNumber", {
+            number: newWord,
+            letterOfThisNumber: numberNewWord,
+        });
     });
 
     socket.on("confirmNumber", () => {

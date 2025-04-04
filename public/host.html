@@ -46,7 +46,7 @@
         });
 
         socket.on("sortedNumber", (number) => {
-            if (confirm(number)) {
+            if (confirm("Letra:"+ number.letterOfThisNumber +"\n"+ number.number + " ")) {
                 socket.emit("confirmNumber", number);
             }
         });
