@@ -115,8 +115,8 @@ button:hover {
     background-color: #2c2c3e;
     color: #f5f5f5;
     font-size: 1rem;
-    width: 90%; /* Aumenta a largura */
-    max-width: 600px; /* Define um limite máximo */
+    height: 70%;
+    width: 35%; /* Aumenta a largura */
     padding: 20px; /* Adiciona espaçamento interno */
 }
 
@@ -125,21 +125,23 @@ button:hover {
     margin-bottom: 10px; /* Espaçamento inferior */
 }
 
-.history-numbers {
+.history-numbers{
     justify-content: center; /* Centraliza a grade horizontalmente */
-    margin-top: 20px;
+    height: 100%; /* Ajusta a altura para ocupar 80% da tela */
+    width: 100%; /* Ajusta a largura para ocupar 80% da tela */
+    align-items: center;
 }
 
 .history-numbers div {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem; /* Aumenta o tamanho da fonte */
+    font-size: 0.75rem; /* Aumenta o tamanho da fonte */
     font-weight: bold;
     text-align: center;
     border-radius: 10px; /* Deixa as bordas mais arredondadas */
-    width: 120px; /* Aumenta a largura das divs */
-    height: 60px; /* Aumenta a altura das divs */
+    width: 100px; /* Aumenta a largura das divs */
+    height: 35px; /* Aumenta a altura das divs */
     background-color: #4caf50; /* Cor de fundo */
     color: white; /* Cor do texto */
 }
