@@ -20,14 +20,14 @@ let HOST = {
 }
 
 let palavrasDeProgramacao = [
-    "Algoritmo", "API", "Array", "Async", "Await", "AWS", "Azure", "Back-end", "BD", "Boostrap", 
-    "Bulma", "C#", "Classe", "Cloud", "Commit", "Condicional", "Construtor", "Controller", "CRUD", "CSS", 
-    "DevOps", "Div", "DotNet", "Encapsulamento", "Event", "Express", "Export", "Fila", "Framework", 
-    "Front-end", "Função", "Git", "GitHub", "Herança", "HTML", "IA", "Import", "JSON", "Kanban", 
-    "Laravel", "Listener", "Loop", "Merge Sort", "Model", "MongoDB", "MySQL", "Node.js", "NoSQL", 
-    "Objeto", "PHP", "Pilha", "Polimorfismo", "POO", "Pop", "Python", "Quick Sort", "React", "REST", 
-    "RESTful", "Response", "SQLite", "Sprint", "SQL", "Tailwind", "Trello", "TypeScript", "Variável", 
-    "View", "Vue", "XML", "JavaScript"
+    "API", "Algoritmo", "Array", "Async", "Await", "AWS", "Azure", "Back-end", "BD", "Boostrap", 
+    "Bulma", "Bug", "C#", "Classe", "Cloud", "Commit","Construtor","Controller", "CRUD", "CSS", 
+    "C++", "DevOps", "Div", "DotNet", "Encapsulamento", "Event", "Express", "Export", "Fila", "Framework", 
+    "Front-end","Função", "Full-stack", "Git", "GitHub", "Herança", "HTML", "IA", "Import","JavaScript", 
+    "JSON","Kanban", "Laravel", "Listener", "Loop", "Merge Sort", "Model", "MongoDB", "MySQL", "Node.js", 
+    "NoSQL", "NPM", "Objeto", "PHP", "Pilha", "Polimorfismo", "POO", "Pop", "Push", "Python", 
+    "Quick Sort", "React", "REST", "RESTful", "Response", "SQLite", "Sprint", "SQL", "Tailwind", "Trello", 
+    "TypeScript", "Variável", "View", "Vue", "XML",
 ];
   
 
