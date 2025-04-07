@@ -42,6 +42,8 @@ io.on("connection", (socket) => {
 
     socket.on("callNumber", () => {
 
+        let comparationArray = [...palavrasDeProgramacao]
+
         // Filter out the already called numbers
         let remainingWords = palavrasDeProgramacao.filter(word => !calledNumbers.includes(word));
 
@@ -54,6 +56,12 @@ io.on("connection", (socket) => {
         // Select a new word from the remaining words
         let numberNewWord = Math.floor(Math.random() * remainingWords.length)
         let newWord = remainingWords[numberNewWord];
+
+        comparationArray.forEach(( palavra, index ) => {
+            if(palavra === newWord){
+                numberNewWord = index;
+            }
+        })
         
         console.log(numberNewWord + "esse é o número do array")
         if(numberNewWord < 15){
