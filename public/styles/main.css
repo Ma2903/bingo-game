@@ -6,12 +6,10 @@ body {
     background-color: #1e1e2f;
     color: #f5f5f5;
     margin: 0;
-    padding: 0;
+    padding: 50px 50px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
+    justify-content: space-around;
+    flex-direction: row-reverse;
 }
 
 .bingo-letter {
@@ -26,12 +24,13 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     text-align: center;
-    max-width: 400px;
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: sticky;
+    top: 20px;
+    height: 700px;
 }
 
 header h1 {
@@ -121,10 +120,11 @@ button:hover {
 }
 
 .history {
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 500px; /* Aumenta o limite de largura */
     height: auto;
     padding: 20px;
     border: 2px solid #4caf50;
@@ -133,39 +133,57 @@ button:hover {
     color: #f5f5f5;
     box-sizing: border-box;
     overflow: hidden;
-  }
-  
-  .history-numbers {
+    gap: 15px; /* Adiciona espaçamento entre os elementos */
+}
+
+.history h2 {
+    font-size: 1.5rem; /* Ajusta o tamanho da fonte */
+    color: #4caf50; /* Cor do título */
+    margin-bottom: 10px; /* Espaçamento inferior */
+    text-align: center; /* Centraliza o texto */
+}
+
+.history-title {
+    font-size: 1.8rem; /* Aumenta o tamanho da fonte */
+    font-weight: bold; /* Deixa o texto em negrito */
+    color: #4caf50; /* Define a cor do título */
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 15px; /* Adiciona espaçamento inferior */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Adiciona sombra ao texto */
+}
+
+.history-numbers {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); /* Ajusta o tamanho mínimo das células */
+    gap: 10px; /* Aumenta o espaçamento entre os números */
     overflow-y: auto;
     padding: 10px;
     box-sizing: border-box;
-  }
-  
-  .history-numbers div {
+}
+
+.history-numbers div {
     aspect-ratio: 1 / 1;
     background-color: #3a3a4e;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(0.6rem, 1vw, 0.9rem);
+    font-size: 1rem; /* Aumenta o tamanho da fonte */
     border: 2px solid #4caf50;
     font-weight: bold;
     color: #f5f5f5;
     user-select: none;
     text-align: center;
     overflow: hidden;
-  }
-
-.history h2 {
-    align-self: center; /* Garante que o título fique alinhado ao topo */
-    margin-bottom: 10px; /* Espaçamento inferior */
+    transition: transform 0.2s, background-color 0.3s;
 }
 
+.history-numbers div:hover {
+    transform: scale(1.1); /* Adiciona um efeito de zoom ao passar o mouse */
+    background-color: #4caf50; /* Muda a cor de fundo ao passar o mouse */
+    color: white; /* Muda a cor do texto ao passar o mouse */
+}
 
 .number-sort {
     display: flex;
@@ -219,17 +237,20 @@ footer i {
 
 .bingo-card {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr); /* 6 linhas */
+    grid-auto-flow: column; /* Continua preenchendo por coluna */
     gap: 10px;
     width: 100%;
-    max-width: 400px;
-    margin: 20px auto;
+    max-width: calc(500px + 20vw);
+    aspect-ratio: 5 / 6; /* mantém proporção da cartela */
+    margin: 0 auto;
+    justify-content: center;
 }
 
 .cell {
     width: 100%;
-    aspect-ratio: 1 / 1;
-    font-size: 0.9rem;
+    aspect-ratio: 1 / 1; /* quadrada */
+    font-size: clamp(0.6rem, 1vw, 0.9rem);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -241,7 +262,9 @@ footer i {
     transition: background-color 0.3s, transform 0.2s;
     user-select: none;
     cursor: pointer;
+    overflow: hidden;
     text-align: center;
+    word-wrap: break-word;
 }
 
 .cell:hover {

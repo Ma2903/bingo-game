@@ -6,22 +6,23 @@
     <title>Bingo Player</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
+    <script src="/socket.io/socket.io.js"></script>
 </head>
-<body>
+<body class="body">
     <div class="history">
-        <h2>Números Sorteados:</h2>
+        <h2 class="history-title">Números Sorteados:</h2>
         <div id="history" class="history-numbers"></div>
     </div>
     <div class="container">
-        <header>
-            <h1><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
+        <header class="header">
+            <h1 class="header-title"><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
         </header>
-        <main>
-            <p>Marque os números chamados e boa sorte!</p>
+        <main class="main-content">
+            <p class="instructions">Marque os números chamados e boa sorte!</p>
             <div class="bingo-card" id="bingoCard"></div>
         </main>
-        <footer>
-            <p>Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
+        <footer class="footer">
+            <p class="footer-text">Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
         </footer>
     </div>
 
@@ -34,7 +35,7 @@
         const token = urlParams.get('token');
 
         // Fetch Bingo card using token
-        let cardNumbers
+        let cardNumbers;
         function adquireBingoCard() {
             fetch(`./getTable?token=${token}`, {
                 method: 'get',
@@ -46,29 +47,28 @@
             .then(data => {
                 if (!data.error) {
                     cardNumbers = data.cartela;
-                    cardNumbers.splice(20,0,"O")
-                    cardNumbers.splice(15,0,"G")
-                    cardNumbers.splice(10,0,"N")
-                    cardNumbers.splice(5,0,"I")
-                    cardNumbers.splice(0,0,"B")
+                    cardNumbers.splice(20, 0, "O");
+                    cardNumbers.splice(15, 0, "G");
+                    cardNumbers.splice(10, 0, "N");
+                    cardNumbers.splice(5, 0, "I");
+                    cardNumbers.splice(0, 0, "B");
 
                     cardNumbers.forEach((num, index) => {
                         let cell = document.createElement("div");
                         cell.classList.add("cell");
-                        if (index == 15) {
+                        if (index === 15) {
                             cell.innerText = "BINGO";
-                            cell.classList.toggle("marked");
-                        } else if(index == 0 || index == 6 || index == 12 || index == 18 || index == 24){
+                            cell.classList.add("marked");
+                        } else if (index === 0 || index === 6 || index === 12 || index === 18 || index === 24) {
                             cell.innerText = num;
-                            cell.classList.toggle("marked");
-
-                        }else {
+                            cell.classList.add("marked");
+                        } else {
                             cell.innerText = num;
                             cell.addEventListener("click", () => {
                                 cell.classList.toggle("marked");
                             });
                         }
-                        if (cell.innerText == "B" || cell.innerText == "I" || cell.innerText == "N" || cell.innerText == "G" || cell.innerText == "O") {
+                        if (["B", "I", "N", "G", "O"].includes(cell.innerText)) {
                             cell.classList.add("bingo-letter");
                         }
                         bingoCard.appendChild(cell);
@@ -89,10 +89,10 @@
 
             const historyContainer = document.querySelector(".history-numbers");
 
-            // Atualiza o histórico com todos os números sorteados
+            // Update the history with all called numbers
             historyContainer.innerHTML = calledNumbers
-            .map(num => `<div class="called-numbers">${num}</div>`)
-            .join("");
+                .map(num => `<div class="called-number">${num}</div>`)
+                .join("");
         });
     </script>
 </body>
