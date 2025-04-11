@@ -6,26 +6,24 @@
     <title>Bingo Player</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/socket.io/socket.io.js"></script>
 </head>
-<body class="bg-gray-900 text-white flex justify-center items-center h-screen">
-    <div class="history"> 
-        <h2 class="text-lg font-bold mb-2 text-center">Números Sorteados:</h2>
-        <div id="history" class="history-numbers bg-gray-700 p-2 rounded-lg text-xs grid grid-cols-5 gap-1"></div>
+<body>
+    <div class="history">
+        <h2>Números Sorteados:</h2>
+        <div id="history" class="history-numbers"></div>
     </div>
-    <div class="container bg-gray-800 p-16 rounded-lg shadow-lg w-2/5 h-auto mx-16">
+    <div class="container">
         <header>
-            <h1 class="text-xl font-bold text-green-500 mb-2 text-center"><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
+            <h1><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
         </header>
         <main>
-            <p class="text-sm mb-2 text-center">Marque os números chamados e boa sorte!</p>
-            <div class="bingo-card grid grid-cols-5 mx-auto" id="bingoCard"></div>
+            <p>Marque os números chamados e boa sorte!</p>
+            <div class="bingo-card" id="bingoCard"></div>
         </main>
         <footer>
-            <p class="text-sm">Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
+            <p>Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
         </footer>
-        </div>
+    </div>
 
     <script>
         const socket = io();
