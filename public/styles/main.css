@@ -32,7 +32,8 @@ body {
 }
 
 .is-2{
-    height: auto !important;
+    /* height: auto !important;*/
+    height: 750px;
 }
 
 header h1 {
