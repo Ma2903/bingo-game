@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gray-900 text-white flex justify-center items-center">
     <div class="container bg-gray-800 p-4 rounded-lg shadow-lg text-center w-3/4 max-w-2x1">
@@ -46,9 +47,18 @@
         });
 
         socket.on("sortedNumber", (number) => {
-            if (confirm("Letra:"+ number.letterOfThisNumber +"\n"+ number.number + " ")) {
+            Swal.fire({
+                title: `Letra ${number.letterOfThisNumber} ${number.number}`, // Mostra a letra e o número
+                icon: "info",
+                confirmButtonText: "OK",
+                customClass: {
+                    popup: "bg-gray-800 text-white", // Fundo do pop-up
+                    confirmButton: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" // Botão estilizado
+                }
+            }).then(() => {
+                // Após o usuário clicar em "OK", emite o número para todos os clientes
                 socket.emit("confirmNumber", number);
-            }
+            });
         });
 
         socket.on("updateNumbers", (numbers) => {
