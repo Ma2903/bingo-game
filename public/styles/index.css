@@ -1,29 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #1e1e2f;
     color: #f5f5f5;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Garante que o conteúdo ocupe toda a altura da tela */
 }
 
 .container {
     background-color: #2c2c3e;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    padding: 32px 24px;
+    border-radius: 16px;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
     text-align: center;
-    width: 90%; /* Responsivo para telas menores */
-    max-width: 500px; /* Limita a largura em telas maiores */
+    width: 95%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 header h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #4caf50;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
 header h1 i {
@@ -31,15 +40,14 @@ header h1 i {
 }
 
 .intro-text {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #28a745;
-    text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     line-height: 1.5;
 }
 
 .form-group {
-    margin: 20px 0;
+    margin: 18px 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -68,7 +76,7 @@ input[type="text"]:focus {
 }
 
 button {
-    padding: 10px 20px;
+    padding: 10px 24px;
     font-size: 1rem;
     background-color: #4caf50;
     color: white;
@@ -76,6 +84,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 8px;
 }
 
 button:hover {
@@ -83,13 +92,26 @@ button:hover {
 }
 
 footer {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #888;
-    margin-top: 20px;
+    margin-top: 24px;
 }
 
 footer i {
     color: #e91e63;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 16px 4px;
+        max-width: 98vw;
+    }
+    header h1 {
+        font-size: 1.3rem;
+    }
+    .intro-text {
+        font-size: 0.95rem;
+    }
 }
 
 @keyframes bounce {

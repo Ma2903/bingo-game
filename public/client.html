@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,92 +9,98 @@
     <link rel="stylesheet" href="styles/client.css">
     <script src="/socket.io/socket.io.js"></script>
 </head>
-<body class="body">
-    <div class="container">
-        <header class="header">
-            <h1 class="header-title"><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i></h1>
-        </header>
-        <main class="main-content">
-            <p class="instructions">Marque os números chamados e boa sorte!</p>
-            <div class="bingo-card" id="bingoCard"></div>
-        </main>
-        <footer class="footer">
-            <p class="footer-text">Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
-        </footer>
-    </div>
-    <div class="history">
-        <h2 class="history-title">Números Sorteados:</h2>
-        <div id="history" class="history-numbers"></div>
-    </div>
 
-    <script>
-        const socket = io();
-        const bingoCard = document.getElementById("bingoCard");
+<body>
+    <div class="main">
+        <div class="container">
+            <header class="header">
+                <h1 class="header-title"><i class="fas fa-gamepad"></i> Sua Cartela de Bingo <i class="fas fa-code"></i>
+                </h1>
+            </header>
+            <main class="main-content">
+                <p class="instructions">Marque os números chamados e boa sorte!</p>
+                <div class="bingo-card" id="bingoCard"></div>
+            </main>
+            <footer class="footer">
+                <p class="footer-text">Desenvolvido com <i class="fas fa-heart"></i> por Devs para Devs</p>
+            </footer>
+        </div>
+        <div class="history">
+            <h2 class="history-title">Números Sorteados:</h2>
+            <div id="history" class="history-numbers"></div>
+        </div>
 
-        // Get token from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
+        <script>
+            const socket = io();
+            const bingoCard = document.getElementById("bingoCard");
 
-        // Fetch Bingo card using token
-        let cardNumbers;
-        function adquireBingoCard() {
-            fetch(`./getTable?token=${token}`, {
-                method: 'get',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (!data.error) {
-                    cardNumbers = data.cartela;
-                    cardNumbers.splice(20, 0, "O");
-                    cardNumbers.splice(15, 0, "G");
-                    cardNumbers.splice(10, 0, "N");
-                    cardNumbers.splice(5, 0, "I");
-                    cardNumbers.splice(0, 0, "B");
+            // Get token from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
 
-                    cardNumbers.forEach((num, index) => {
-                        let cell = document.createElement("div");
-                        cell.classList.add("cell");
-                        if (index === 15) {
-                            cell.innerText = "BINGO";
-                            cell.classList.add("marked");
-                        } else if (index === 0 || index === 6 || index === 12 || index === 18 || index === 24) {
-                            cell.innerText = num;
-                            cell.classList.add("marked");
-                        } else {
-                            cell.innerText = num;
-                            cell.addEventListener("click", () => {
-                                cell.classList.toggle("marked");
+            // Fetch Bingo card using token
+            let cardNumbers;
+            function adquireBingoCard() {
+                fetch(`./getTable?token=${token}`, {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.error) {
+                            cardNumbers = data.cartela;
+                            cardNumbers.splice(20, 0, "O");
+                            cardNumbers.splice(15, 0, "G");
+                            cardNumbers.splice(10, 0, "N");
+                            cardNumbers.splice(5, 0, "I");
+                            cardNumbers.splice(0, 0, "B");
+
+                            cardNumbers.forEach((num, index) => {
+                                let cell = document.createElement("div");
+                                cell.classList.add("cell");
+                                if (index === 15) {
+                                    cell.innerText = "BINGO";
+                                    cell.classList.add("marked");
+                                } else if (index === 0 || index === 6 || index === 12 || index === 18 || index === 24) {
+                                    cell.innerText = num;
+                                    cell.classList.add("marked");
+                                } else {
+                                    cell.innerText = num;
+                                    cell.addEventListener("click", () => {
+                                        cell.classList.toggle("marked");
+                                    });
+                                }
+                                if (["B", "I", "N", "G", "O"].includes(cell.innerText)) {
+                                    cell.classList.add("bingo-letter");
+                                }
+                                bingoCard.appendChild(cell);
                             });
+                        } else {
+                            window.location.href = "/";
                         }
-                        if (["B", "I", "N", "G", "O"].includes(cell.innerText)) {
-                            cell.classList.add("bingo-letter");
-                        }
-                        bingoCard.appendChild(cell);
                     });
-                } else {
-                    window.location.href = "/";
-                }
-            });
-        }
-
-        adquireBingoCard();
-
-        // Listen for called numbers
-        socket.on("showNumber", (calledNumbers) => {
-            if (calledNumbers.length < 1) {
-                return;
             }
 
-            const historyContainer = document.querySelector(".history-numbers");
+            adquireBingoCard();
 
-            // Update the history with all called numbers
-            historyContainer.innerHTML = calledNumbers
-                .map(num => `<div class="called-number">${num}</div>`)
-                .join("");
-        });
-    </script>
+            // Listen for called numbers
+            socket.on("showNumber", (calledNumbers) => {
+                if (calledNumbers.length < 1) {
+                    return;
+                }
+
+                const historyContainer = document.querySelector(".history-numbers");
+
+                // Update the history with all called numbers
+                historyContainer.innerHTML = calledNumbers
+                    .map(num => `<div class="called-number">${num}</div>`)
+                    .join("");
+            });
+        </script>
+    </div>
+
 </body>
+
 </html>

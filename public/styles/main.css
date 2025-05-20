@@ -7,24 +7,25 @@ body {
     background-color: #1e1e2f;
     color: #f5f5f5;
     margin: 0;
-    padding: 50px 50px;
+    padding: 0;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
 }
 
 .container {
     background-color: #2c2c3e;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    padding: 32px 24px;
+    border-radius: 16px;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
     text-align: center;
-    width: 90%;
+    width: 95%;
     max-width: 800px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 24px;
 }
 
 header h1 {
@@ -42,14 +43,14 @@ header h1 {
 }
 
 .btn-host {
-    padding: 10px 20px;
+    padding: 10px 24px;
     font-size: 1.2rem;
     color: #fff;
     background-color: #4caf50;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -61,7 +62,7 @@ header h1 {
 
 .called-numbers {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 colunas */
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     background-color: #3a3a4e;
     padding: 20px;
@@ -87,11 +88,29 @@ header h1 {
 }
 
 footer {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #888;
-    margin-top: 20px;
+    margin-top: 24px;
 }
 
 footer i {
     color: #e91e63;
+}
+
+@media (max-width: 800px) {
+    .container {
+        padding: 16px 4px;
+        max-width: 98vw;
+    }
+    header h1 {
+        font-size: 1.5rem;
+    }
+    .btn-host {
+        font-size: 1rem;
+        padding: 8px 12px;
+    }
+    .called-numbers {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 10px;
+    }
 }
