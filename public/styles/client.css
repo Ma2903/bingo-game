@@ -1,5 +1,7 @@
-html{
+html {
     scroll-behavior: smooth;
+    /* Adicionado para garantir que o html também não cause overflow */
+    overflow: hidden;
 }
 
 * {
@@ -12,14 +14,19 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #1e1e2f;
     color: #f5f5f5;
+    min-height: 100vh;
+    position: relative;
+    /* padding: 1em; */
+    /* Adicionado para esconder a barra de rolagem horizontal no body */
+    overflow-x: hidden;
 }
 
 .main {
-    display: grid;
-    grid-template-columns: 50% 50%;
+    display: flex;
     align-items: flex-start;
     gap: 2em;
-    padding: 2em;
+    padding: 2em 1em;
+    width: 100%; /* Garante que .main não exceda a largura do body */
 }
 
 .container {
@@ -30,25 +37,18 @@ body {
     height: auto;
     border: 2px solid #4caf50;
     border-radius: 10px;
-    padding: 2em;
+    padding: 1.5em;
     background-color: #2c2c3e;
-    padding: 1em;
     gap: 1em;
-    /*  */
 }
 
 .header-title {
-    font-size: 2rem;
+    font-size: 1.2rem;
     color: #4caf50;
     text-align: center;
-}
-
-.instructions {
-    font-size: 1rem;
-    color: #28a745;
-    text-align: center;
-    margin-bottom: 20px;
-    line-height: 1.5;
+    position: absolute;
+    top: 5px;
+    left: 11em;
 }
 
 .bingo-card {
@@ -74,7 +74,7 @@ body {
 }
 
 .bingo-card .bingo-letter {
-    font-size: 2.2rem;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
     font-weight: bold;
     background-color: #23233a;
     color: #4caf50;
@@ -84,7 +84,6 @@ body {
 }
 
 .bingo-card .cell.marked:not(.bingo-letter) {
-    /* Removido font-size e letter-spacing para não aumentar ao marcar */
     justify-content: center;
     align-items: center;
     display: flex;
@@ -93,7 +92,7 @@ body {
 .cell {
     width: 100%;
     aspect-ratio: 1 / 1;
-    font-size: 1rem;
+    font-size: clamp(0.6rem, 2.5vw, 0.9rem);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -117,27 +116,12 @@ body {
     transform: scale(1.03);
 }
 
-.bingo-letter {
-    font-size: 2.2rem;
-    font-weight: bold;
-    text-align: center;
-    background-color: #23233a;
-    color: #4caf50;
-    cursor: default;
-    pointer-events: none;
-    transition: none;
-}
-
 .marked {
     background-color: #4caf50;
     color: white;
 }
 
 .history {
-    position: sticky;
-    top: 1em;
-    right: 1em;
-    align-self: start;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -146,11 +130,12 @@ body {
     border-radius: 10px;
     background-color: #2c2c3e;
     color: #f5f5f5;
-   
+    height: 33.60em;
+    width: 100%;
 }
 
 .history-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #4caf50;
     text-align: center;
@@ -161,29 +146,30 @@ body {
 .history-numbers {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Sempre 5 colunas */
-    gap: 10px; /* Espaçamento entre as pedras */
-    overflow-y: auto; /* Permite rolagem vertical */
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 8px;
+    overflow-y: auto; /* Mantém a rolagem vertical se necessário */
     padding: 10px;
     box-sizing: border-box;
-    max-height: calc(100% - 50px); /* Ajusta a altura para caber dentro do .history */
 }
 
 .history-numbers div {
-    width: 6em; /* Largura em em para as pedras */
-    height: 6em; /* Altura em em para as pedras */
+    /* min-width: 50px; */ /* Removido - Deixe minmax no grid-template-columns controlar isso */
+    aspect-ratio: 1 / 1;
     background-color: #3a3a4e;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
+    font-size: clamp(0.6rem, 2vw, 0.75rem);
     border: 2px solid #4caf50;
     font-weight: bold;
     color: #f5f5f5;
     user-select: none;
     text-align: center;
     transition: transform 0.2s, background-color 0.3s;
+    padding: 2px;
+    word-break: break-all;
 }
 
 .history-numbers div:hover {
@@ -196,6 +182,7 @@ body {
     font-size: 0.9rem;
     color: #888;
     margin-top: 20px;
+    text-align: center;
 }
 
 .footer-text i {
@@ -204,3 +191,104 @@ body {
 
 /* Responsividade */
 
+@media (max-width: 1024px) {
+    .main {
+        padding: 1em;
+        grid-template-columns: 1fr;
+    }
+
+    .history {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-top: 2em;
+        max-height: 400px;
+    }
+
+    .history-numbers {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    }
+
+     .bingo-card {
+        max-width: 400px;
+    }
+
+    .cell {
+         font-size: clamp(0.7rem, 2.8vw, 1rem);
+    }
+    .bingo-card .bingo-letter {
+        font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+    }
+}
+
+@media (max-width: 767px) {
+    .main {
+        padding: 0.5em;
+        gap: 1em;
+    }
+    .container {
+        padding: 1em;
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+    }
+
+    .instructions {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+
+    .bingo-card {
+        max-width: 100%;
+        gap: 0.2em;
+    }
+
+    .cell {
+        font-size: clamp(0.5rem, 3vw, 0.8rem);
+        border-width: 1px;
+        line-height: 1;
+        padding: 0.1em;
+    }
+
+    .bingo-card .bingo-letter {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+    }
+
+    .history {
+        padding: 0.8em;
+    }
+
+    .history-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .history-numbers {
+        grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+        gap: 5px;
+        padding: 5px;
+    }
+
+    .history-numbers div {
+        /* min-width: 40px; */ /* Removido */
+        font-size: clamp(0.5rem, 2.5vw, 0.65rem);
+        border-width: 1px;
+    }
+
+    .footer-text {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .cell {
+         font-size: clamp(0.4rem, 2.5vw, 0.7rem);
+    }
+    .bingo-card .bingo-letter {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+    }
+    .history-numbers div {
+        font-size: clamp(0.4rem, 2.2vw, 0.6rem);
+    }
+}
