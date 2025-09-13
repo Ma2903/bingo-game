@@ -55,6 +55,8 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(6, 1fr);
+    grid-auto-flow: column;    /* <- adiciona isso */
+    grid-auto-rows: 1fr;       /* <- opcional, garante alturas iguais */
     width: 100%;
     max-width: 450px;
     aspect-ratio: 5 / 6;
