@@ -1,43 +1,73 @@
 # 🎱 Bingo Game para Devs
 
-Este é um projeto de um jogo de bingo com um toque especial para quem ama programação!  
-Ao invés de números, as pedras sorteadas são **palavras da área de desenvolvimento de software** — como *loop*, *commit*, *bug*, *deploy* e muitas outras.
+<p align="center">
+  <em>Um projeto de bingo com um toque especial para quem ama programação. Troque os números por termos do dia a dia de um dev e divirta-se!</em>
+</p>
 
-Ideal para eventos, aulas ou momentos descontraídos entre devs!
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Concluído-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Tecnologia-JavaScript-yellow?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Licença-MIT-green?style=for-the-badge" />
+</p>
 
-## 📌 Funcionalidades Principais
+---
 
-- Geração automática de cartelas de bingo com termos técnicos
-- Sorteio aleatório de palavras do universo dos programadores
-- Interface interativa para marcação dos termos
-- Reinício do jogo a qualquer momento
-- Layout responsivo e leve
+## 💡 Sobre o Jogo
 
-## 🚀 Como Usar
+Este é um jogo de bingo temático onde as pedras sorteadas são **palavras da área de desenvolvimento de software** — como *`loop`*, *`commit`*, *`bug`*, *`deploy`* e muitas outras.
 
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/Ma2903/bingo-game.git
-   
-2. Acesse o diretório do projeto:
-   ```bash
-   cd bingo-game
+É um projeto simples e divertido, ideal para usar em eventos, dinâmicas de grupo, aulas ou simplesmente para um momento de descontração entre colegas de equipe.
 
-3. Abra o arquivo index.html no seu navegador preferido.
+---
 
-Não é necessário instalar dependências. O projeto roda 100% no navegador.
+## ✨ Funcionalidades
+
+-   **Cartelas Dinâmicas:** Gera automaticamente cartelas de bingo com termos técnicos a cada novo jogo.
+-   **Sorteio Aleatório:** Sorteia palavras do universo dev sem repetição.
+-   **Interface Interativa:** Marque os termos sorteados diretamente na sua cartela.
+-   **Controle de Jogo:** Inicie um novo jogo a qualquer momento com um único clique.
+-   **Responsividade:** Jogue em qualquer dispositivo, seja no desktop ou no celular.
+
+---
+
+## 🚀 Como Executar
+
+Este projeto foi feito com **JavaScript puro** (Vanilla JS), HTML e CSS. Não há necessidade de instalar pacotes ou dependências.
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/Ma2903/bingo-game.git
+    ```
+2.  **Navegue até o diretório:**
+    ```bash
+    cd bingo-game
+    ```
+3.  **Abra o arquivo `index.html`** no seu navegador de preferência e comece a jogar!
+
+---
 
 ## 🎮 Como Jogar
-Ao abrir o jogo, uma cartela personalizada será gerada com termos do mundo dev.
 
-Clique no botão "Sortear palavra" para iniciar os sorteios.
+1.  Ao carregar a página, uma cartela será gerada para você.
+2.  Clique no botão **"Sortear Palavra"** para que a primeira palavra seja sorteada.
+3.  Se a palavra sorteada estiver na sua cartela, clique sobre ela para marcá-la.
+4.  Continue sorteando até completar sua cartela. BINGO!
+5.  Para começar de novo, clique em **"Novo Jogo"**.
 
-A palavra sorteada será exibida na tela.
+---
 
-Marque na cartela se você tiver a palavra correspondente.
+## ✒️ Autores e Colaboradores
 
-Clique em "Novo Jogo" para começar de novo com uma nova cartela.
+Este projeto foi desenvolvido por:
+
+-   **[Manoela Pinheiro da Silva](https://github.com/Ma2903)** - (Desenvolvimento e Design)
+-   **[João Pedro Garcia Girotto](https://github.com/JP1005YT)** - (Desenvolvimento)
+
+Com o auxílio de:
+-   **[Paulo Diney da Silva Martins](https://github.com/PauloDiney)** - (Design)
+
+---
 
 ## 📄 Licença
-Este projeto está licenciado sob a Licença MIT.
-Você pode utilizá-lo, modificá-lo e distribuí-lo livremente, desde que preserve os créditos ao autor original.
+
+Este projeto está licenciado sob a **Licença MIT**. Sinta-se à vontade para usar, modificar e distribuir o código.
